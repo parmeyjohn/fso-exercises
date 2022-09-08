@@ -1,0 +1,8 @@
+NOTE: used preexisting websequencediagrams boilerplate
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server->browser: "{"message":"note created"}"
+note over browser:
+    event handler creates new note, pushes it onto the list, rerenders
+    it on the page, and sends it to the server
+note end
