@@ -49,17 +49,14 @@ const PersonForm = ({newName, newNum, setNewName, setNewNum, addPerson, searchVa
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas',
-      number: '123-456-7891'    
-  }
   ])
   
   
   useEffect(() => {
     personServ.getData()
       .then(response => setPersons(response.data))
-  }
-  )
+  }, 
+  [])
   
    
   const [newName, setNewName] = useState('')
@@ -107,7 +104,7 @@ const App = () => {
         {persons.filter(
           p => p.name.toLowerCase().includes(searchVal))
           .map((p) => 
-          <li key={p.name}> {p.name}: {p.number} <button onClick={() => personServ.delPerson(p.id)}>delete</button></li>)}
+          <li key={p.name}> {p.name}: {p.number} <button onClick={() => personServ.delPerson(p.id, p.name).then(() => setPersons(persons.filter((p2) => p2.id !== p.id )))}>delete</button></li>)}
       </ul>
       ...
     </div>
